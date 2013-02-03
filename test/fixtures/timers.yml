@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  default: 1
+  position: 1
+  visable: false
+  color: MyString
+
+two:
+  name: MyString
+  default: 1
+  position: 1
+  visable: false
+  color: MyString

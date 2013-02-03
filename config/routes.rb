@@ -1,4 +1,8 @@
 VTool::Application.routes.draw do
+
+  match 'timers/:id' => 'timers#set', :via => :post
+  resources :timers
+
   match 'projectors/:id' => 'projectors#command', :via => :post
   match 'projectors/command' => 'projectors#command', :via => :post
   resources :projectors

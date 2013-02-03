@@ -20,6 +20,7 @@
             	{:text => "Tagesordnung", :controller => "items", :action => "index"},
             	{:text => "Beamer", :controller => "projectors", :action => "index"},
             	{:text => "Folien", :controller => "slides", :action => "index"},
+            	{:text => "Timer", :controller => "timers", :action => "index"},
             	{:text => "Debugger", :controller => "home", :action => "debug"},
             ].each { |e| %> 
             		<li<%= ' class="active"'.html_safe if controller.controller_name == e[:controller] and (controller.action_name == e[:action] or controller.controller_name != "home") %>><%= link_to e[:text], :controller => e[:controller], :action => e[:action] %></li>

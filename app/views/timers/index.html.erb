@@ -1,0 +1,45 @@
+<h1>Listing timers</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Default</th>
+    <th>Position</th>
+    <th>Uhrzeit: <span id="time"></span></th>
+  </tr>
+
+<% @timers.each do |timer| %>
+  <tr>
+    <td><%= timer.name %></td>
+    <td><%= format_time timer.default %></td>
+    <td id="timer-<%=timer.id%>-now"><%= format_time timer.now? %></td>
+    <td>
+    	<div class="btn-toolbar">
+		  <div class="btn-group">
+		    <a class="btn" href="#" id="timer-<%=timer.id%>-start"		onclick='$.post("<%= url_for timer %>", { "set": "start"} );'>		<i class="icon-play"></i></a>
+		    <a class="btn" href="#" id="timer-<%=timer.id%>-show"		onclick='$.post("<%= url_for timer %>", { "set": "show"} );'>		<i class="icon-eye-open"></i></a>
+		    <a class="btn" href="#"	id="timer-<%=timer.id%>-start_show"	onclick='$.post("<%= url_for timer %>", { "set": "start_show"} );'>	<i class="icon-forward"></i></a>
+		  </div>
+		  <div class="btn-group">
+		    <a class="btn" href="#" id="timer-<%=timer.id%>-stop"		onclick='$.post("<%= url_for timer %>", { "set": "stop"} );'>		<i class="icon-pause"></i></a>
+		    <a class="btn" href="#" id="timer-<%=timer.id%>-hide"		onclick='$.post("<%= url_for timer %>", { "set": "hide"} );'>		<i class="icon-eye-close"></i></a>
+		    <a class="btn" href="#" id="timer-<%=timer.id%>-stop_hide"	onclick='$.post("<%= url_for timer %>", { "set": "stop_hide"} );'>	<i class="icon-stop"></i></a>
+		  </div>
+		  <div class="btn-group">
+		  	<a class="btn" href="#" onclick='$.post("<%= url_for timer %>", { "set": "reset"} );'>	<i class="icon-refresh"></i></a>
+		 	<a class="btn" href="<%= url_for edit_timer_path(timer) %>">												<i class="icon-wrench"></i></a>
+		    <a class="btn" href="<%= url_for timer %>" data-confirm="Bist du sicher?" data-method="delete" rel="nofollow"><i class="icon-trash"></i></a>
+		  </div>
+		</div>		
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<script type="text/javascript">
+	timer_index_init();
+</script>
+
+<br />
+
+<%= link_to 'New Timer', new_timer_path %>

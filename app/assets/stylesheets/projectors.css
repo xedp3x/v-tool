@@ -61,7 +61,25 @@
 	background-color: #ff8800;
 	color: #ffffff;
 	font-size: 3.5em;
-	font-weight:bold;
+	font-weight: bold;
+}
+
+#timers {
+	position: fixed;
+	top: 25px;
+	right: 190px;
+	height: 35px;
+}
+#timers > div {
+	float: right;
+	height: 100%;
+	font-size: 3em;
+	width: 150px;
+	padding: 20px 20px 10px 30px;
+	margin-left: -10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	color: white;
 }
 
 .flash-push {

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @timer.name %>
+</p>
+
+<p>
+  <b>Default:</b>
+  <%= @timer.default %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @timer.position %>
+</p>
+
+<p>
+  <b>Visable:</b>
+  <%= @timer.visable %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @timer.color %>
+</p>
+
+
+<%= link_to 'Edit', edit_timer_path(@timer) %> |
+<%= link_to 'Back', timers_path %>

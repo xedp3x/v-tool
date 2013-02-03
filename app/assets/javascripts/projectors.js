@@ -2,6 +2,7 @@ var cach = new Array();
 var slide = 0;
 var projector = 0;
 var myip = '';
+var hasTimer = true;
 
 function slide_load(id) {
 	try {
@@ -92,26 +93,51 @@ function projector_init() {
 		});
 
 		push.subscribe("clock", function(data) {
-			for (var i = 0; ( c = data[i]) != null; i++) {
-				var date = new Date(c["unix"] * 1000);
-				var hours = date.getHours();
-				if (hours < 10) {
-					hours = "0"+hours
-				}
-				var minutes = date.getMinutes();
-				if (minutes < 10) {
-					minutes = "0"+minutes
-				}
-				var seconds = date.getSeconds();
-				if (seconds < 10) {
-					seconds = "0"+seconds
-				}
+			try {
+				for (var i = 0; ( c = data[i]) != null; i++) {
+					if (c["unix"] < 0) {
+						var date = new Date((0 - c["unix"]) * 1000);
+					} else {
+						var date = new Date(c["unix"] * 1000);
+					}
 
-				if (c["id"] == "main") {
-					$('#currentTime').html(hours + ':' + minutes);
-				} else {
-					$('#clock-' + c["id"] + "-clock").html(hours + ':' + minutes + ':' + seconds);
+					var hours = date.getHours();
+					if (hours < 10) {
+						hours = "0" + hours
+					}
+					var minutes = date.getMinutes();
+					if (minutes < 10) {
+						minutes = "0" + minutes
+					}
+					var seconds = date.getSeconds();
+					if (seconds < 10) {
+						seconds = "0" + seconds
+					}
+
+					if (c["id"] == "main") {
+						$('#currentTime').html(hours + ':' + minutes);
+					} else {
+						if (hasTimer) {
+							if (document.getElementById('timer-' + c["id"]) == undefined) {
+								document.getElementById('timers').innerHTML += '<div id="timer-' + c["id"] + '" class="timer" > --:-- </div>'
+							}
+						}
+						if (c["unix"] < 0) {
+							$('#timer-' + c["id"]).html('⌛  -' + minutes + ':' + seconds).css('background-color', '#' + c["color"]).css('color', '#000000');
+						} else {
+							$('#timer-' + c["id"]).html('⌛ ' + minutes + ':' + seconds).css('background-color', '#' + c["color"]).css('color', '#FFFFFF');
+						}
+
+						if (c["visable"]) {
+							$('#timer-' + c["id"]).show();
+						} else {
+							$('#timer-' + c["id"]).hide();
+						}
+					}
 				}
+			} catch(err) {
+				$('.flash-danger').html('<center>ERROR: projector_cmd</center><br /><br /><pre style="font-size: 25%;">' + err.message + '</pre>').fadeIn('slow').delay(15000).fadeOut('slow');
+
 			}
 		});
 
