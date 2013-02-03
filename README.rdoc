@@ -11,12 +11,12 @@ Requirements
 * SQLite 3
 
 Setup
-*apt-get install ruby redis bundler sqlite3
-*NodeJS > http://nodejs.org
-*npm install -g juggernaut
-*bundler install
-*export RAILS_ENV=production
-*rake db:migrate
+* apt-get install ruby redis bundler sqlite3
+* NodeJS > http://nodejs.org
+* npm install -g juggernaut
+* bundler install
+* export RAILS_ENV=production
+* rake db:migrate
 
 Für mehr Performance ggf. noch passenger installieren.
 
