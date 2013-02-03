@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>V-Tool</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "push" %>
+  <%= csrf_meta_tags %>
+  <% if @load_push then %>
+  <script type="text/javascript" charset="utf-8">
+  	var push = new Juggernaut({
+		secure: false,
+		host: document.location.hostname,
+		port: 8080
+	});
+  </script>	
+  <% end %>
+</head>
+<body style="padding-top: 60px;">
+<%= render 'home/menu' if @no_menu.nil?%>
+
+<div class="container-fluid">
+<%= yield %>
+</div>
+</body>
+</html>

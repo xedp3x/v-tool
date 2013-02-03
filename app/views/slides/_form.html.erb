@@ -1,0 +1,91 @@
+<%= form_for(@slide) do |f| %>
+  <% if @slide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
+
+      <ul>
+      <% @slide.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="float: left;">
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<td>Type</td>
+			<% @slide.art = "Text" if @slide.art.nil? %>
+			<td><select id="art" name="slide[art]" onChange="
+		    	for (var i = 0; (element = $('.types')[i]) != null; i++) {
+		    		element.style.display = 'none';
+		    		if (element.id == 'type_'+document.getElementById('art').options[this.selectedIndex].value){
+		    			element.style.display = 'block';
+		    		}
+		    	}">
+		      <option<%= " selected" if @slide.art == "Text" %>>Text</option>
+		      <option<%= " selected" if @slide.art == "Antrag" %>>Antrag</option>
+		      <option<%= " selected" if @slide.art == "HTML" %>>HTML</option>
+		      <option<%= " selected" if @slide.art == "twitter" %>>twitter</option>
+		    </select></td>
+		</tr>
+		<tr>
+		    <td>TO Punk</td>
+		    <td><select id="art" name="slide[item_id]">
+		    	<% @items.each do |item| %>
+					<option value="<%=item.id%>" <%= " selected" if @slide.item == item %>><%=item.name%></option>
+				<% end %>
+			</select></td>
+		</tr>
+		<tr>
+			<td colspan="2">Auf Beamer setzen<br />
+			<% @projectors.each do |projector| %>
+				<label class="checkbox">
+				  <input type="checkbox" name="projector_add[]" value="<%=projector.id%>"><%=projector.name%></input>
+				</label>
+			<% end %>
+			</td>
+		</tr>
+	</table>
+	<div class="actions">
+    	<%= f.submit %>
+	</div>
+  </div>
+      	
+  <div style="float: left; padding-left: 20px;">
+	  <div class="types" id="type_Text"<%= " style='display: none'".html_safe if @slide.art != "Text" %>>
+	  		Erlaubt ist die <a href="http://en.wikipedia.org/wiki/Creole_(markup)" target="_blank">Creole</a> schreibweise.<br />
+	  		<textarea name="slide[data][text]" rows="20" class="input-xxlarge"><%= @slide.data["text"] rescue "" %></textarea>
+	  </div>
+	  
+	  <div class="types" id="type_HTML"<%= " style='display: none'".html_safe if @slide.art != "HTML" %>>
+	  		<textarea name="slide[data][html]" rows="20" class="input-xxlarge"><%= @slide.data["html"] rescue "" %></textarea>
+	  </div>
+
+	  <div class="types" id="type_Antrag"<%= " style='display: none'".html_safe if @slide.art != "Antrag" %>>
+	  	<table>
+	  		<tr><td>Antragsteller</td>	<td><input name="slide[data][antrag][owner]" 	value="<%= @slide.data["antrag"]["owner"] rescue "" %>" type="text"/></td></tr>
+	  		<tr><td>Status</td>			<td><select id="art" name="slide[data][antrag][state]">
+		  		<%["Offen","Angenommen","Abgelehnt","Zurückgezogen","Vertagt" ].each { |e| %>
+	            	 <option<%= " selected" if (@slide.data["antrag"]["state"] == e) rescue "" %>><%=e%></option>
+	            <% } %>
+	       		</select>
+	  	</table>
+	  	Antrag:		<br /><textarea name="slide[data][antrag][text]"	rows="10" class="input-xxlarge"><%= @slide.data["antrag"]["text"] rescue "" %></textarea><br />
+	  	Begründung:	<br /><textarea name="slide[data][antrag][reason]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["reason"] rescue "" %></textarea>
+	  </div>
+	
+	  <div class="types" id="type_twitter"<%= " style='display: none'".html_safe if @slide.art != "twitter" %>>
+	  	<a href="http://tweetwally.com">tweetwally</a> URL: <br />
+	  	<div class="input-append">
+		  	<input name="slide[data][twitter]" value="<%= @slide.data["twitter"] rescue "" %>" type=text /><span class="add-on">.tweetwally.com</span>
+		</div>
+	  </div>	
+	
+  </div>
+<div style="clear: both;"></div>
+<% end %>

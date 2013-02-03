@@ -1,0 +1,25 @@
+<h1 style="border-bottom: 1px solid #DDDDDD; padding-bottom: 10px; margin-bottom: -1px; margin-left: 10px; padding-left: 10px;" ><%= @item.name %></h1>
+<% if @slides.count == 0 then%>
+<p>Zu diesem Tagesordnungpunkt gibt es keine Folien.</p>
+<% else %>
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs" id="items-<%=@item.id %>" style="max-width:20%;">
+  	<% @slides.each{ |s |%>
+  		<li id="nav-<%=s.id%>" <%= ' class="active"'.html_safe if s.id == @slide.id rescue "" %>>
+  			<%= link_to s.name, ((s.id == @slide.id ? "#" : {:slide => s.id }) rescue {:slide => s.id}) %></li>
+  	<% }%>
+  </ul>
+  <div class="tab-content" id="slides">
+  	<% if @slide then %>
+  		<div class="slide" id="slide-<%= @slide.id %>"><%= render 'slides/show' %></div>
+  		<script type="text/javascript" charset="utf-8">
+		    push.subscribe("slide-<%=@slide.id%>", function(data){
+		      document.getElementById("slide-<%= @slide.id %>").innerHTML= data["data"];
+		    });
+		</script>
+  	<% else %>
+    	<div class="slide" id="slide-none"><h2>Bitte ein Folie von Links auswählen</h2></div>
+    <% end %>
+  </div>
+</div>
+<% end %>

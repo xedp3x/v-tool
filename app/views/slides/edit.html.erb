@@ -1,0 +1,11 @@
+<%= render 'form' %>
+<script type="text/javascript" charset="utf-8">
+	function remote (){
+		alert('Diese Seite wurde von jemand ander Bearbeitet.\r\n\r\nEs muss neu geladen werden!');
+		location.reload();
+	}
+    push.subscribe("slide-<%=@slide.id%>", function(data){
+      window.setTimeout("remote()", 1000);
+      
+    });
+</script>

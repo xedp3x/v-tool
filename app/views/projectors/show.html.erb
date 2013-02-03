@@ -1,0 +1,54 @@
+<div id="header">
+	<div id="currentTime"></div>
+	<div id="projector-controls">
+	  <i class="icon icon-zoom-in zoom-in" title="Schrift vergrößern"	onclick="projector_cmd({'cmd':'zoom-in'})"></i>
+	  <i class="icon icon-zoom-out zoom-out" title="Schrift verkleinern"onclick="projector_cmd({'cmd':'zoom-out'})"></i>
+	  <i class="icon icon-chevron-up scroll-down" title="Hinabscrollen"	onclick="projector_cmd({'cmd':'scroll-up'})"></i>
+	  <i class="icon icon-chevron-down scroll-up" title="Hinaufscrollen"onclick="projector_cmd({'cmd':'scroll-down'})"></i>
+	</div>
+</div>
+
+<div id="flashs">
+  <div class="flash-push">Keine Verbindung</div>
+  <div class="flash-danger"></div>
+  <div class="flash-information"></div>
+  <div class="flash-success"></div>
+</div>
+
+<div id="body">
+	<h1>Loading . . .<br /><br /><br /></h1>
+	<noscript>
+		<span style="color: red; font-size: 300%;">
+			Fehler: Für diese Ansicht ist Javascript unbeding erforderlich!
+		</span>
+	</noscript>
+</div>
+
+<script type="text/javascript">
+	try{
+		projector = <%=@projector.id %>;
+		myip = '<%=request.remote_ip%>';
+		slide = <%=@projector.slide_id %>;
+		
+		var connected = false;
+		push.on("connect", function(){
+			cach = new Array(); // Cach leeren
+			projector_init();
+			connected= true;
+			$('.flash-push').fadeOut('fast');
+		});
+		push.on("disconnect", function(){$('.flash-push').fadeIn('slow');});
+		push.on("reconnect",  function(){$('.flash-push').fadeOut('fast');});
+		
+		function CheckPush(){
+			if (!connected){
+				$('.flash-push').fadeIn('slow');
+				window.setTimeout('location.reload();',30000);
+			}
+		}
+		window.setTimeout('CheckPush();',3000);
+	} catch(err) {
+		$('.flash-danger').html('<center>ERROR: init</center><br /><br /><pre style="font-size: 25%;">' + err.message + '</pre>').fadeIn('slow');
+		window.setTimeout('location.reload();',30000);
+	}
+</script>

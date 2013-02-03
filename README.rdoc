@@ -1,0 +1,41 @@
+= V-Tool
+
+Das V-Tool ist für die Unterstützung von Versammlungen gedacht.
+
+== Installation
+
+# Requirements
+* Node.js
+* Redis
+* Ruby
+* SQLite 3
+
+apt-get install ruby redis bundler sqlite3
+NodeJS > http://nodejs.org
+npm install -g juggernaut
+bundler install
+export RAILS_ENV=production
+rake db:migrate
+
+Für mehr Performance ggf. noch passenger installieren.
+
+== Start
+Wir brauchen den Rails-Server oder noch besser passenger.
+Das Push wird von juggernaut ausgeführt. Dieser Server muss auch gestartet werden.
+
+== Unterstütze Browser
+
+Prinzipiell läuft es auf allem. Bei aktiviertem Javascript funktioniert das Push mit folgenden Browsern:
+* Desktop
+  * Internet Explorer >= 5.5
+  * Safari >= 3
+  * Google Chrome >= 4
+  * Firefox >= 3
+  * Opera 10.61
+* Mobile
+  * iPhone Safari
+  * iPad Safari
+  * Android WebKit
+  * WebOs WebKit 
+
+Für die Admin-Seiten ist Javascript zwingend erforderlich.

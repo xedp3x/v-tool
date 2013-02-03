@@ -1,0 +1,19 @@
+<div style="float: left" id="data"><h1>Warte auf Daten...</h1></div>
+<textarea id="log" readonly style="float: right; height: 500px; width: 400px;"></textarea>
+  
+<script type="text/javascript" charset="utf-8">
+    var logElement = document.getElementById("log");
+    logElement.value = "";
+    var log = function(data){
+      logElement.value += (data + "\n");
+    };
+    
+    push.subscribe("command", function(data){
+      document.getElementById("data").innerHTML= data["data"];
+      log("Got Command:" + print_r(data));
+    });
+    push.subscribe("data", function(data){
+      document.getElementById("data").innerHTML= data["data"];
+      log("Got data: " + print_r(data));
+    });
+</script>

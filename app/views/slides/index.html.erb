@@ -1,0 +1,33 @@
+<% if params[:search] then %>
+	<h1>Gefundene Folien:</h1>
+<% else %>
+	<h1>Alle Folien</h1>
+<% end %>
+
+<% if @slides.count != 0 then %>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @slides.each do |slide| %>
+  <tr>
+    <td><%= slide.name %></td>
+    <td><%= slide.art %></td>
+    <td><%= link_to 'Show', slide %></td>
+    <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
+    <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+<h2>Keine Folien vorhanden</h2>
+<% end %>
+
+<br />
+
+<%= link_to 'New Slide', new_slide_path %>
