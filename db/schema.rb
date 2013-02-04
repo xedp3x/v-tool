@@ -23,8 +23,9 @@ ActiveRecord::Schema.define(:version => 20130203164156) do
   create_table "projectors", :force => true do |t|
     t.string   "name"
     t.integer  "slide_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "has_timer",  :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "slides", :force => true do |t|
