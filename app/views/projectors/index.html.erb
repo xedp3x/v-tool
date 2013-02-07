@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Slide</th>
     <th>
+    	<% if @write_right then %>
     	<div class="btn-toolbar">
 		  <div class="btn-group">
 	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "ident"} );'>	<i class="icon-search"></i></a>
@@ -15,6 +16,7 @@
 	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "flash"} );'>	<i class="icon-fullscreen"></i></a>
 	      </div>
 	    </div>
+	    <% end %>
     </th>
   </tr>
   <tr id="flash" style="overflow: hidden;">
@@ -46,9 +48,12 @@
     <td>
     	<div class="btn-toolbar">
 		  <div class="btn-group">
+		  	<% if @write_right then %>
 		 	<a class="btn" href="<%= url_for edit_projector_path(projector) %>">										<i class="icon-wrench"></i></a>
+		 	<% end %>
 		 	<a class="btn" href="<%= url_for projector %>" target="_blank">												<i class="icon-eye-open"></i></a>
 		  </div>
+		  <% if @write_right then %>
 		  <div class="btn-group">
 		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-up"} );'>		<i class="icon-chevron-down"></i></a>
 		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-null"} );'>	<i class="icon-minus"></i></a>
@@ -62,6 +67,7 @@
 		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "reload"} );'>		<i class="icon-repeat"></i></a>
 		    <a class="btn" href="<%= url_for projector %>" data-confirm="Bist du sicher?" data-method="delete" rel="nofollow"><i class="icon-trash"></i></a>
 		  </div>
+		  <% end %>
 		</div>		
     </td>
   </tr>

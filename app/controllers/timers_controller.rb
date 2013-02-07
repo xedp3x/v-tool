@@ -7,7 +7,7 @@ class TimersController < ApplicationController
     @timers = Timer.all
     @load_push = true
 
-    @write_right = @current_user.can? :timer
+    @write_right = userCould :timer
 
     respond_to do |format|
       format.html # index.html.erb

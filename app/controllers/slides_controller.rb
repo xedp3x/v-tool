@@ -3,6 +3,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
+    @write_right = userCould :slide
     if params[:search] then
       @slides = Slide.find(:all, :conditions => ["name LIKE ?", "%#{params[:search]}%"])
       redirect_to @slides[0] if @slides.count == 1

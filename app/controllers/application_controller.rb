@@ -1,5 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  def userCould right
+    if !@current_user then
+      return false if session[:user_id].nil?
+      @current_user= User.find session[:user_id]
+    end
+    @current_user.can? right
+  end
 
   def userCan right
     login if !@current_user

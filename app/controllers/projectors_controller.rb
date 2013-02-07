@@ -4,6 +4,7 @@ class ProjectorsController < ApplicationController
   # GET /projectors.json
   def index
     @projectors = Projector.all
+    @write_right = userCould :projector
 
     respond_to do |format|
       format.html # index.html.erb

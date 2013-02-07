@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.find(:all, :order => "position")
+    @write_right = userCould :timer
 
     respond_to do |format|
       format.html # index.html.erb

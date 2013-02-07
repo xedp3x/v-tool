@@ -8,19 +8,23 @@
 <table class="table table-striped">
   <tr>
     <th>Name</th>
+    <% if @write_right then %>
     <th>Type</th>
     <th></th>
     <th></th>
     <th></th>
+    <% end %>
   </tr>
 
 <% @slides.each do |slide| %>
   <tr>
     <td><%= slide.name %></td>
+    <% if @write_right then %>
     <td><%= slide.art %></td>
     <td><%= link_to 'Show', slide %></td>
     <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
     <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
