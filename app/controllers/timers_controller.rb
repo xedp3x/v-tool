@@ -1,9 +1,13 @@
 class TimersController < ApplicationController
+  before_filter :login
+
   # GET /timers
   # GET /timers.json
   def index
     @timers = Timer.all
     @load_push = true
+
+    @write_right = @current_user.can? :timer
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +29,7 @@ class TimersController < ApplicationController
   # GET /timers/new
   # GET /timers/new.json
   def new
+    return false if !userCan :timer
     @timer = Timer.new
 
     respond_to do |format|
@@ -35,12 +40,16 @@ class TimersController < ApplicationController
 
   # GET /timers/1/edit
   def edit
+    return false if !userCan :timer
+
     @timer = Timer.find(params[:id])
   end
 
   # POST /timers
   # POST /timers.json
   def create
+    return false if !userCan :timer
+
     @timer = Timer.new(params[:timer])
 
     respond_to do |format|
@@ -57,6 +66,8 @@ class TimersController < ApplicationController
   # PUT /timers/1
   # PUT /timers/1.json
   def update
+    return false if !userCan :timer
+
     @timer = Timer.find(params[:id])
 
     respond_to do |format|
@@ -69,11 +80,13 @@ class TimersController < ApplicationController
       end
     end
   end
-  
+
   # POST /timers/1
   def set
+    return false if !userCan :timer
+
     timer = Timer.find(params[:id])
-    
+
     case params[:set]
     when "start"  
        timer.start
@@ -97,14 +110,15 @@ class TimersController < ApplicationController
        timer.position = timer.default
        timer.save      
     end
-    
+
     render :text => "OK"
   end
-  
 
   # DELETE /timers/1
   # DELETE /timers/1.json
   def destroy
+    return false if !userCan :timer
+
     @timer = Timer.find(params[:id])
     @timer.destroy
 

@@ -1,5 +1,9 @@
 VTool::Application.routes.draw do
 
+  match 'login' => 'users#user_login'
+  resources :users
+
+
   match 'timers/:id' => 'timers#set', :via => :post
   resources :timers
 

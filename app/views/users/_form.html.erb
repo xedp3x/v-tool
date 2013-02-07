@@ -1,0 +1,39 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password, :placeholder => "ungeänder"%>
+  </div>
+  <div class="field">
+  	<input type=hidden name="user[rights][default]" value="true" />
+    <%= f.label :rights, "Rechte" %><br />
+	<%{
+		:timer => "Kann Timer steuern",
+		:slide => "Kann Slids bearbeiten",
+		:projector => "Kann Beamer steuern",
+		:user => "Kann User bearbeiten" 
+      }.each { |r,d| %> 
+        <label class="checkbox">
+			<input type="checkbox" name="user[rights][<%=r%>]" value="true" <%= "checked" if @user.can? r %>><%=d%></input>
+		</label>
+    <% } %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
