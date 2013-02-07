@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
+  before_filter :login, :except => [:index, :show]
   # GET /items
   # GET /items.json
   def index
     @items = Item.find(:all, :order => "position")
-  
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @items }
@@ -11,16 +12,17 @@ class ItemsController < ApplicationController
   end
 
   def switch
-      item_a = Item.find(params[:a])
-      item_b = Item.find(params[:b])
-      
-      pos_a = item_a.position
-      
-      item_a.update_attributes(:position => item_b.position);
-      item_b.update_attributes(:position => pos_a);
-      
-      redirect_to items_url
-  end 
+    return false if !userCan :items
+    item_a = Item.find(params[:a])
+    item_b = Item.find(params[:b])
+
+    pos_a = item_a.position
+
+    item_a.update_attributes(:position => item_b.position);
+    item_b.update_attributes(:position => pos_a);
+
+    redirect_to items_url
+  end
 
   # GET /items/1
   # GET /items/1.json
@@ -29,9 +31,9 @@ class ItemsController < ApplicationController
     @slides= @item.slides
     @slide= @slides[0] if @slides.count == 1 and !params[:slide]
     @slide= Slide.find(params[:slide]) if params[:slide]
-    
+
     @load_push = true
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item }
@@ -41,6 +43,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
+    return false if !userCan :items
     @item = Item.new
 
     respond_to do |format|
@@ -51,14 +54,16 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    return false if !userCan :items
     @item = Item.find(params[:id])
   end
 
   # POST /items
   # POST /items.json
   def create
+    return false if !userCan :items
     @item = Item.new(params[:item])
-    
+
     respond_to do |format|
       if @item.save
         @item.update_attributes(:position => @item.id)
@@ -74,6 +79,7 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
+    return false if !userCan :items
     @item = Item.find(params[:id])
 
     respond_to do |format|
@@ -90,6 +96,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
+    return false if !userCan :items
     @item = Item.find(params[:id])
     @item.destroy
 

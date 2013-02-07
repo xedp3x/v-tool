@@ -1,4 +1,5 @@
 class ProjectorsController < ApplicationController
+  before_filter :login, :except => [:index, :show]
   # GET /projectors
   # GET /projectors.json
   def index
@@ -15,13 +16,14 @@ class ProjectorsController < ApplicationController
   def show
     @projector = Projector.find(params[:id])
     @load_push = true
-    
+
     render :layout => "full"
   end
 
   # GET /projectors/new
   # GET /projectors/new.json
   def new
+    return false if !userCan :projector
     @projector = Projector.new
     @slides = Slide.all
 
@@ -33,6 +35,7 @@ class ProjectorsController < ApplicationController
 
   # GET /projectors/1/edit
   def edit
+    return false if !userCan :projector
     @projector = Projector.find(params[:id])
     @slides = Slide.all
   end
@@ -40,6 +43,7 @@ class ProjectorsController < ApplicationController
   # POST /projectors
   # POST /projectors.json
   def create
+    return false if !userCan :projector
     @projector = Projector.new(params[:projector])
 
     respond_to do |format|
@@ -56,6 +60,7 @@ class ProjectorsController < ApplicationController
   # PUT /projectors/1
   # PUT /projectors/1.json
   def update
+    return false if !userCan :projector
     @projector = Projector.find(params[:id])
 
     respond_to do |format|
@@ -70,10 +75,10 @@ class ProjectorsController < ApplicationController
     end
   end
 
-
   # POST /projectors/1
   # POST /projectors/command
   def command
+    return false if !userCan :projector
     params[:command]["id"] = "projector-"+params[:id]
     params[:command]["id"] = "projector" if params[:id] == "command"
     Message.Command params[:command]
@@ -83,6 +88,7 @@ class ProjectorsController < ApplicationController
   # DELETE /projectors/1
   # DELETE /projectors/1.json
   def destroy
+    return false if !userCan :projector
     @projector = Projector.find(params[:id])
     @projector.destroy
 

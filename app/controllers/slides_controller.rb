@@ -1,4 +1,5 @@
 class SlidesController < ApplicationController
+  before_filter :login, :except => [:index, :show]
   # GET /slides
   # GET /slides.json
   def index
@@ -37,6 +38,7 @@ class SlidesController < ApplicationController
   # GET /slides/new
   # GET /slides/new.json
   def new
+    return false if !userCan :slide
     @slide = Slide.new
     @items = Item.find(:all, :order => "position")
     @projectors = Projector.all
@@ -49,16 +51,18 @@ class SlidesController < ApplicationController
 
   # GET /slides/1/edit
   def edit
+    return false if !userCan :slide
     @slide = Slide.find(params[:id])
     @items = Item.find(:all, :order => "position")
     @projectors = Projector.all
-    
+
     @load_push=true;
   end
 
   # POST /slides
   # POST /slides.json
   def create
+    return false if !userCan :slide
     @slide = Slide.new(params[:slide])
 
     respond_to do |format|
@@ -82,6 +86,7 @@ class SlidesController < ApplicationController
   # PUT /slides/1
   # PUT /slides/1.json
   def update
+    return false if !userCan :slide
     @slide = Slide.find(params[:id])
 
     respond_to do |format|
@@ -105,6 +110,7 @@ class SlidesController < ApplicationController
   # DELETE /slides/1
   # DELETE /slides/1.json
   def destroy
+    return false if !userCan :slide
     @slide = Slide.find(params[:id])
     @slide.destroy
     Message.Send("slide-#{params[:id]}",{ :type => "data", :id => "slide-#{params[:id]}", :data => "<h1 class='middel'>Slide has been removed!</h1>"})
