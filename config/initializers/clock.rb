@@ -6,16 +6,8 @@ if !defined?(Rails::Console) then
 
       data.push({"id" => "main","unix" => Time.now.to_i})
 
-      timers = Timer.all
-      timers.each { | t |
-        data.push({
-          "id"    => t.id,
-          "unix"  => t.now?,
-          "activ" => t.activ?,
-          "name"  => t.name,
-          "color" => t.color,
-          "visable" => t.visable
-        })
+      Timer.all.each { | t |
+        data.push(t.pusch_data)
       }
 
       Message.Clock data
