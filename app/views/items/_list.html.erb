@@ -14,7 +14,7 @@
 		<span style="position: absolute; right: 100px;">
 		</span>
 		<% end %>
-		<%= render "list", :items => item.children if item.has_children? %>
+		<%= render "list", :items => item.children.order("position") if item.has_children? %>
 	</li>
 	<% end %>
 </ol>
