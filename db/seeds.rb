@@ -6,11 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 5.times do |i|
-  Item.create(:name => "TO "+i.to_s)
+  itm= Item.create(:name => "TO "+i.to_s)
   3.times do |s|
-   Slide.create(:art => "Text", :item_id => i, :name => "Slide "+i.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"}) 
+    Slide.create(:art => "Text", :item_id => itm.id, :name => "Slide "+i.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"})
+  end
+  2.times do |u|
+    uitm= Item.create(:name => "TO "+i.to_s+'-'+u.to_s, :parent => itm)
+    3.times do |s|
+      Slide.create(:art => "Text", :item_id => uitm.id, :name => "Slide "+i.to_s+'-'+u.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"})
+    end
   end
 end
 

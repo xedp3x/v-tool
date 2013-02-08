@@ -30,6 +30,7 @@ gem 'less-rails-bootstrap'
 gem 'bootstrap-sass'
 gem 'creole'
 gem 'fastthread'
+gem 'ancestry'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
