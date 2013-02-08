@@ -16,11 +16,11 @@ class SlidesController < ApplicationController
     end
   end
 
-  def publish(id)
-    @slide = Slide.find(id)
+  def publish(slide)
+    @slide = slide
     @broadcast=true;
     data = render_to_string(:action => "show",:layout => false)
-    Message.Send("slide-#{id}",{ :type => "data", :id => "slide-#{id}", :data => data})
+    Message.Send("slide-#{slide.id}",{ :type => "data", :id => "slide-#{slide.id}", :data => data})
   end
 
   # GET /slides/1

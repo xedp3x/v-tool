@@ -7,6 +7,6 @@ class Slide < ActiveRecord::Base
 
   def send_update
     sc= SlidesController.new
-    sc.publish self.id
+    sc.publish self
   end
 end
