@@ -68,7 +68,6 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.save
-        self.publish(@slide.id)
         if params[:projector_add] then
           params[:projector_add].each {|v|
             Projector.find(v).update_attributes(:slide_id => params[:id]);
@@ -92,7 +91,6 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.update_attributes(params[:slide])
-        self.publish(@slide.id)
         if params[:projector_add] then
           params[:projector_add].each {|v|
             Projector.find(v).update_attributes(:slide_id => params[:id]);
