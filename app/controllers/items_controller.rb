@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.find(:all, :order => "position")
+    @items = Item.roots.order("position")
     @write_right = userCould :timer
 
     respond_to do |format|
@@ -46,6 +46,7 @@ class ItemsController < ApplicationController
   def new
     return false if !userCan :items
     @item = Item.new
+    @items = Item.roots.order("position")
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,6 +58,7 @@ class ItemsController < ApplicationController
   def edit
     return false if !userCan :items
     @item = Item.find(params[:id])
+    @items = Item.roots.order("position")
   end
 
   # POST /items

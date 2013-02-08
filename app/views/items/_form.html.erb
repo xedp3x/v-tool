@@ -15,6 +15,18 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div>
+  	<ul class="unstyled">
+  		<li>
+  			<label class="checkbox" style="margin-left: -20px;">
+				<input type="radio" name="item[parent_id]" value="" style="position: absolute; left: 5px;" <%= "checked" if @item.is_root? %>> ROOT
+			</label>
+			<ol>
+				<%= render "radio", :items => @items %>
+			</ol>
+		</li>
+  	</ul>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

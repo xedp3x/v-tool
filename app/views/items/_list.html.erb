@@ -1,0 +1,23 @@
+<ol>
+	<% items.each_with_index do |item, index| %>
+	<li>
+		<% if @write_right then %>
+
+		<% end %>
+		<span>
+			<%= link_to item.name, item %>
+		</span>
+		<% if @write_right then %>
+		<span style="position: absolute; left: -60px;">
+			<%= link_to 'E', edit_item_path(item) %>
+			<%= link_to 'D', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= index > 0?(link_to '↑', :action => "switch", :a => items.to_a[index-1].id, :b => item.id) : "&nbsp;&nbsp;".html_safe %>
+			<%= link_to '↓', :action => "switch", :a => items.to_a[index+1].id, :b => item.id if index < items.count - 1%>
+		</span>
+		<span style="position: absolute; right: 100px;">
+		</span>
+		<% end %>
+		<%= render "list", :items => item.children if item.has_children? %>
+	</li>
+	<% end %>
+</ol>

@@ -1,0 +1,10 @@
+<% items.each do |item| %>
+<li>
+	<label class="checkbox" style="margin-left: -20px;">
+	<input type="radio" name="item[parent_id]" value="<%=item.id%>" style="position: absolute; left: 5px;" <%= "checked" if @item.parent == item %>><%=item.name%>
+	</label>
+	<ol>
+		<%= render "radio", :items => item.children if item.has_children? %>
+	</ol>
+</li>
+<% end %>

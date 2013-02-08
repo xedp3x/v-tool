@@ -1,23 +1,8 @@
 <h1>Tagesordnung</h1>
 
-<table class="table table-hover">
-<% @items.each_with_index do |item, index| %>
-  <tr>
-  	<% if @write_right then %>
-  	<td style="width: 10px;"><%= link_to '↑', :action => "switch", :a => @items.to_a[index-1].id, :b => item.id if index > 0%></td>
-  	<td style="width: 10px;"><%= link_to '↓', :action => "switch", :a => @items.to_a[index+1].id, :b => item.id if index < @items.count - 1%></td>
-  	<% end %>
-    <td onclick="window.location='<%= url_for item %>'" ><%= link_to item.name, item %></td>
-    <% if @write_right then %>
-    <td style="width: 100px;">
-    	<%= link_to 'Edit', edit_item_path(item) %>
-    	<%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-
+<div style="<%= 'left: 50px; position: relative;' if @write_right %> ">
+<%= render "list", :items => @items %>
+</div>
 <br />
 
 <%= link_to 'New Item', new_item_path %>
