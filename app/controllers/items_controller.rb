@@ -69,7 +69,6 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        @item.update_attributes(:position => @item.id)
         format.html { redirect_to items_url }
         format.json { render json: @item, status: :created, location: @item }
       else
