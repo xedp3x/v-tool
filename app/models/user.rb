@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   end
   
   def can? right
+    return true if self.rights["admin"]
     self.rights[right.to_s] rescue false
   end
 

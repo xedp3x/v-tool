@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+u= User.create :name => "admin", :password => "admin"
+u.allow :admin
+u.save
+
 5.times do |i|
   itm= Item.create(:name => "TO "+i.to_s)
   3.times do |s|
