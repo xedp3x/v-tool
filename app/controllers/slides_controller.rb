@@ -32,7 +32,7 @@ class SlidesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @slide }
-      format.text { render :text => render_to_string('_show', :layout => false, :formats => "html") }
+      format.text { @broadcast=true; render :text => render_to_string('_show', :layout => false, :formats => "html") }
     end
   end
 

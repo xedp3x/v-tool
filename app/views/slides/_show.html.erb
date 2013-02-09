@@ -6,6 +6,55 @@ when "Text" %>
 <% when "HTML" %>
   <%= @slide.data["html"].html_safe %>
 
+<% when "Antrag" %>
+  <div class="antrag_body">
+  	<% if @slide.data["antrag"]["short"] != "" %>
+	  	<h2 style="text-decoration:underline;">Zusammenfassung</h2>
+	  	<%= parse_antrag @slide.data["antrag"]["short"] %>
+	<% end %>
+  	<% if @slide.data["antrag"]["text"] != "" %>
+  		<hr />
+	  	<h2 style="text-decoration:underline;">Antrag</h2>
+	  	<%= @slide.data["antrag"]["text"] %>
+	  	<hr />
+	<% end %>
+  	<% if @slide.data["antrag"]["reason"] != "" %>
+	  	<h2 style="text-decoration:underline;">Begründung</h2>
+	  	<%= parse_antrag @slide.data["antrag"]["reason"] %>
+	<% end %>
+  </div>
+  <div class="antag_info" style="<%= "top: 50px;" if !@broadcast %>">
+	  <table cellpadding="5px" cellspacing="5px" style="width: 100%;">
+	    <tr>
+	      <th colspan="2">
+	      	<div class="antrag_info_head">
+			<%= @slide.data["antrag"]["id"] %>
+			</div>
+	      </th>
+	    </tr>
+	    <tr>
+	      <th>Antragsteller</th>
+	      <td><%= @slide.data["antrag"]["owner"] %></td>
+	    </tr>
+	    <tr>
+	      <th>Status</th>
+	      <td><%= @slide.data["antrag"]["state"] %></td>
+	    </tr>
+	    <% @slide.data["antrag"]["note"].split("\n").each do |line| line= line.split "|" %>
+	    <tr>
+	      <th><%= line[0] %></th>
+	      <td><%= line[1] %></td>
+	    </tr>
+	    <% end %>
+	    <% @slide.data["antrag"]["link"].split("\n").each do |line| line= line.split "|" %>
+	    <tr>
+	      <th><%= line[0] %></th>
+	      <td><a href="<%= line[1] %>"><%= line[2] %></a></td>
+	    </tr>
+	    <% end %>
+	  </table>
+	</div>
+
 <% when "twitter" %>
 	<iframe 
 	 	src="http://<%= @slide.data["twitter"] %>.tweetwally.com/embed" 

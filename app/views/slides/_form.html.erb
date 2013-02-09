@@ -68,15 +68,24 @@
 
 	  <div class="types" id="type_Antrag"<%= " style='display: none'".html_safe if @slide.art != "Antrag" %>>
 	  	<table>
+	  		<tr><td>Antrags ID</td>		<td><input name="slide[data][antrag][id]" 		value="<%= @slide.data["antrag"]["id"] rescue "" %>" type="text"/></td></tr>
 	  		<tr><td>Antragsteller</td>	<td><input name="slide[data][antrag][owner]" 	value="<%= @slide.data["antrag"]["owner"] rescue "" %>" type="text"/></td></tr>
 	  		<tr><td>Status</td>			<td><select id="art" name="slide[data][antrag][state]">
 		  		<%["Offen","Angenommen","Abgelehnt","Zurückgezogen","Vertagt" ].each { |e| %>
 	            	 <option<%= " selected" if (@slide.data["antrag"]["state"] == e) rescue "" %>><%=e%></option>
 	            <% } %>
-	       		</select>
+	       		</select></td>
+	  		<tr><td>Syntax</td>			<td><select name="slide[data][antrag][parser]">
+		  		<%["Creole","Wiki","Text","HTML"].each { |e| %>
+	            	 <option<%= " selected" if (@slide.data["antrag"]["parser"] == e) rescue "" %>><%=e%></option>
+	            <% } %>
+	       		</select></td>
 	  	</table>
-	  	Antrag:		<br /><textarea name="slide[data][antrag][text]"	rows="10" class="input-xxlarge"><%= @slide.data["antrag"]["text"] rescue "" %></textarea><br />
-	  	Begründung:	<br /><textarea name="slide[data][antrag][reason]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["reason"] rescue "" %></textarea>
+	  	Zusammenfassung:	<br /><textarea name="slide[data][antrag][short]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["short"] rescue "" %></textarea><br />
+	  	Antrag:				<br /><textarea name="slide[data][antrag][text]"	rows="10" class="input-xxlarge"><%= @slide.data["antrag"]["text"] rescue "" %></textarea><br />
+	  	Begründung:			<br /><textarea name="slide[data][antrag][reason]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["reason"] rescue "" %></textarea><br />
+	  	Infos: Titel|Text	<br /><textarea name="slide[data][antrag][note]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["note"] rescue "" %></textarea><br />
+	  	Links: Titel|ULR|name<br /><textarea name="slide[data][antrag][link]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["link"] rescue "" %></textarea><br />
 	  </div>
 	
 	  <div class="types" id="type_twitter"<%= " style='display: none'".html_safe if @slide.art != "twitter" %>>

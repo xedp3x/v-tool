@@ -1,0 +1,33 @@
+.antag_info {
+    width:30%;
+    float:right; 
+    clear:right;
+    background:#f7f7f7;
+    border:2px solid #ccc;
+    position: fixed;
+    right: 30px;
+    top:130px;
+    border-radius: 10px;
+}
+
+.antag_info th {
+  text-align:left;
+}
+
+.antag_info td {
+  text-align:left;
+}
+
+.antrag_info_head {
+  text-align:center; 
+  background:#ddd;
+  border:2px solid #ccc;
+  font-size: 4em;
+  height: 40px;
+  border-radius: 10px;
+  padding-top: 20px;
+}
+
+.antrag_body {
+  width:65%;
+}

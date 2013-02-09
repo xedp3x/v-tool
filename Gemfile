@@ -29,6 +29,7 @@ gem 'jquery-rails'
 gem 'less-rails-bootstrap'
 gem 'bootstrap-sass'
 gem 'creole'
+gem 'marker'
 gem 'fastthread'
 gem 'ancestry'
 
