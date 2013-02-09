@@ -1,5 +1,5 @@
 class TimersController < ApplicationController
-  before_filter :login
+  before_filter :login, :except => [:index, :show]
 
   # GET /timers
   # GET /timers.json
