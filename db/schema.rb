@@ -33,10 +33,13 @@ ActiveRecord::Schema.define(:version => 20130204200304) do
     t.string   "name"
     t.string   "art"
     t.text     "data"
+    t.string   "unique"
     t.integer  "item_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "slides", ["unique"], :name => "index_slides_on_unique", :unique => true
 
   create_table "timers", :force => true do |t|
     t.string   "name"

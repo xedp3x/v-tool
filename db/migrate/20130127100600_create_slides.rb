@@ -4,9 +4,11 @@ class CreateSlides < ActiveRecord::Migration
       t.string :name
       t.string :art
       t.text :data
+      t.string :unique
 
       t.integer :item_id
       t.timestamps
     end
+    add_index :slides, :unique, :unique => true
   end
 end

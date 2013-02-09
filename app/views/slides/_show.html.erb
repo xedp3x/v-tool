@@ -15,7 +15,7 @@ when "Text" %>
   	<% if @slide.data["antrag"]["text"] != "" %>
   		<hr />
 	  	<h2 style="text-decoration:underline;">Antrag</h2>
-	  	<%= @slide.data["antrag"]["text"] %>
+	  	<%= parse_antrag @slide.data["antrag"]["text"] %>
 	  	<hr />
 	<% end %>
   	<% if @slide.data["antrag"]["reason"] != "" %>

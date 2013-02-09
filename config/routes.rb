@@ -20,6 +20,9 @@ VTool::Application.routes.draw do
   root :to => 'home#index'
   match 'debugger' => 'home#debug'
   
+  match 'admin' => 'admin#index'
+  match 'admin/import/antrag' => 'admin#import_antrag', :via => :post
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
