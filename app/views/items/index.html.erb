@@ -3,6 +3,7 @@
 <div style="<%= 'left: 50px; position: relative;' if @write_right %> ">
 <%= render "list", :items => @items %>
 </div>
+<% if @write_right then %>
 <br />
-
 <%= link_to 'New Item', new_item_path %>
+<% end %>
