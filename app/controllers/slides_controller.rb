@@ -28,6 +28,7 @@ class SlidesController < ApplicationController
   def show
     @slide = Slide.find(params[:id])
     @load_push = true
+    @menu_edit_link =  ("<a href='"+edit_slide_path(@slide)+"'>Edit</a>").html_safe if userCould :slide
 
     respond_to do |format|
       format.html # show.html.erb

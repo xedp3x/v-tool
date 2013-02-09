@@ -32,6 +32,7 @@ class ItemsController < ApplicationController
     @slides= @item.slides
     @slide= @slides[0] if @slides.count == 1 and !params[:slide]
     @slide= Slide.find(params[:slide]) if params[:slide]
+    @menu_edit_link =  ("<a href='"+edit_item_path(@item)+"'>Edit</a>").html_safe if userCould :timer
 
     @load_push = true
 
