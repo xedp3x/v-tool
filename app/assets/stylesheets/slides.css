@@ -31,3 +31,12 @@
 .antrag_body {
   width:65%;
 }
+
+#slides > div > div.antag_info {
+    position: static;
+    right: 0px;
+    top: 0px;
+}
+#slides > div > div.antrag_body {
+	width:100%;
+}

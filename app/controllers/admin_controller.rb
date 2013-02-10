@@ -25,11 +25,17 @@ class AdminController < ApplicationController
       s.data["antrag"]["short"]   = d["zusammenfassung"]
       s.data["antrag"]["text"]    = d["text"]
       s.data["antrag"]["reason"]  = d["begruendung"]
-      s.data["antrag"]["note"]    = "Gruppe|#{d["gruppe"]}\nType|#{d["kind"]}"
-      s.data["antrag"]["link"]    = "Wiki|#{d["wiki"]}|Wiki"
+      s.data["antrag"]["note"]    = "Type|"+d["typ"]+"\n"
+      s.data["antrag"]["note"]    += "Konkurrenz|"+d["konkurrenz"]+"\n" if d["konkurrenz"] != ""
+
+      s.data["antrag"]["link"]    = "Gruppe|"+(url_for s.item)+"|"+d["gruppe"]+"\n"
+      s.data["antrag"]["link"]    += "Wiki|"+d["wiki"]+"|Wiki\n" if d["wiki"] != ""
+      s.data["antrag"]["link"]    += "Pad|"+d["pad"]+"|Pad\n" if d["pad"] != ""
+      s.data["antrag"]["link"]    += "LQFB|"+d["lqfb"]+"|LQFB\n" if d["lqfb"] != ""
 
       s.save
     end
-    render :action => "index"
+    Message.Command "id" => "projector", "cmd" => "reload"
+    redirect_to :action => "index"
   end
 end

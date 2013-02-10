@@ -1,29 +1,14 @@
-<h1><%= @slide.name %></h1>
 <% case @slide.art 
 when "Text" %>
+  <h1><%= @slide.name %></h1>
   <%= Creole.creolize(@slide.data["text"]).html_safe %>
   
 <% when "HTML" %>
+  <h1><%= @slide.name %></h1>
   <%= @slide.data["html"].html_safe %>
 
 <% when "Antrag" %>
-  <div class="antrag_body">
-  	<% if @slide.data["antrag"]["short"] != "" %>
-	  	<h2 style="text-decoration:underline;">Zusammenfassung</h2>
-	  	<%= parse_antrag @slide.data["antrag"]["short"] %>
-	<% end %>
-  	<% if @slide.data["antrag"]["text"] != "" %>
-  		<hr />
-	  	<h2 style="text-decoration:underline;">Antrag</h2>
-	  	<%= parse_antrag @slide.data["antrag"]["text"] %>
-	  	<hr />
-	<% end %>
-  	<% if @slide.data["antrag"]["reason"] != "" %>
-	  	<h2 style="text-decoration:underline;">Begründung</h2>
-	  	<%= parse_antrag @slide.data["antrag"]["reason"] %>
-	<% end %>
-  </div>
-  <div class="antag_info" style="<%= "top: 50px;" if !@broadcast %>">
+  <div class="antag_info">
 	  <table cellpadding="5px" cellspacing="5px" style="width: 100%;">
 	    <tr>
 	      <th colspan="2">
@@ -34,7 +19,7 @@ when "Text" %>
 	    </tr>
 	    <tr>
 	      <th>Antragsteller</th>
-	      <td><%= @slide.data["antrag"]["owner"] %></td>
+	      <td><%= @slide.data["antrag"]["owner"].html_safe %></td>
 	    </tr>
 	    <tr>
 	      <th>Status</th>
@@ -54,6 +39,23 @@ when "Text" %>
 	    <% end %>
 	  </table>
 	</div>
+	<div class="antrag_body">
+  	<h1><%= @slide.name %></h1>
+  	<% if @slide.data["antrag"]["short"] != "" %>
+	  	<h2 style="text-decoration:underline;">Zusammenfassung</h2>
+	  	<%= parse_antrag @slide.data["antrag"]["short"] %>
+	<% end %>
+  	<% if @slide.data["antrag"]["text"] != "" %>
+  		<hr />
+	  	<h2 style="text-decoration:underline;">Antrag</h2>
+	  	<%= parse_antrag @slide.data["antrag"]["text"] %>
+	  	<hr />
+	<% end %>
+  	<% if @slide.data["antrag"]["reason"] != "" %>
+	  	<h2 style="text-decoration:underline;">Begründung</h2>
+	  	<%= parse_antrag @slide.data["antrag"]["reason"] %>
+	<% end %>
+  </div>
 
 <% when "twitter" %>
 	<iframe 
@@ -67,6 +69,7 @@ when "Text" %>
 	</iframe>
   
 <% else %>
+  <h1><%= @slide.name %></h1>
   <b>Data:</b>
   <%= debug @slide.data %>
 <% end %>
