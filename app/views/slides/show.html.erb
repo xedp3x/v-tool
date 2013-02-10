@@ -1,12 +1,16 @@
 <% if !@broadcast then %>
 <div id="body">
+	<div id="slides">
+		<div class="slide" id="slide-<%= @slide.id %>">
 <% end %>
 <%= render 'show'%>
 <% if !@broadcast then %>
+		</div>
+	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
     push.subscribe("slide-<%=@slide.id%>", function(data){
-      document.getElementById("body").innerHTML= data["data"];
+      document.getElementById("slide-<%= @slide.id %>").innerHTML= data["data"];
     });
 </script>
 <% end %>
