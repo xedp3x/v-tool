@@ -30,6 +30,15 @@ class SlidesController < ApplicationController
     @load_push = true
     @menu_edit_link =  ("<a href='"+edit_slide_path(@slide)+"'>Edit</a>").html_safe if userCould :slide
 
+    if userCould :projector then
+      @menu_cmd_link = '<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Beamer<b class="caret"></b></a><ul class="dropdown-menu" role="menu" aria-labelledby="drop2">'
+      Projector.all.each{|p|
+        @menu_cmd_link += '<li><a href="#" onclick=\'$.post("'+(url_for p)+'", { "command[cmd]": "load", "command[slide]": "'+@slide.id.to_s+'", "authenticity_token" : "'+form_authenticity_token+'"} );\'>'+p.name+'</a></li>' 
+        }
+      @menu_cmd_link += '</ul>'
+      @menu_cmd_link = @menu_cmd_link.html_safe
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @slide }

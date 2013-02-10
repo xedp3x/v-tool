@@ -82,6 +82,7 @@ class ProjectorsController < ApplicationController
     return false if !userCan :projector
     params[:command]["id"] = "projector-"+params[:id]
     params[:command]["id"] = "projector" if params[:id] == "command"
+    Projector.find(params[:id]).update_attributes(:slide_id => params[:command][:slide]) if params[:command][:cmd] == "load"
     Message.Command params[:command]
     redirect_to projectors_url
   end

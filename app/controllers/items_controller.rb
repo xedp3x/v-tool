@@ -32,7 +32,17 @@ class ItemsController < ApplicationController
     @slides= @item.slides
     @slide= @slides[0] if @slides.count == 1 and !params[:slide]
     @slide= Slide.find(params[:slide]) if params[:slide]
-    @menu_edit_link =  ("<a href='"+edit_item_path(@item)+"'>Edit</a>").html_safe if userCould :timer
+    @menu_edit_link =  ("<a href='"+edit_item_path(@item)+"'>Edit</a>").html_safe if userCould :items
+
+    if ((userCould :slide) or (userCould :projector)) and !@slide.nil? then
+      @menu_cmd_link = '<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Slide<b class="caret"></b></a><ul class="dropdown-menu" role="menu" aria-labelledby="drop2">'
+      Projector.all.each{|p|
+        @menu_cmd_link += '<li><a href="#" onclick=\'$.post("'+(url_for p)+'", { "command[cmd]": "load", "command[slide]": "'+@slide.id.to_s+'", "authenticity_token" : "'+form_authenticity_token+'"} );\'>Auf Beamer '+p.name+'</a></li>' 
+        }if userCould :projector
+      @menu_cmd_link += '<li><a href="'+edit_slide_path(@slide)+'">Bearebieten</a></li>' if userCould :slide
+      @menu_cmd_link += '</ul>'
+      @menu_cmd_link = @menu_cmd_link.html_safe
+    end
 
     @load_push = true
 
