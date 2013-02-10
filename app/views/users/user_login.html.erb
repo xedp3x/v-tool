@@ -5,6 +5,7 @@
 					<h2>Login</h2>
 					<span style="color: red"><%= @error%></span>
 					<form method="post">
+						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 						<fieldset>
 							<div class="clearfix">
 								<input name=name type="text" placeholder="Username">
