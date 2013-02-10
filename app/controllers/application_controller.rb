@@ -3,13 +3,23 @@ class ApplicationController < ActionController::Base
   before_filter :load_user
 
   def load_user
-    @current_user= User.find session[:user_id] if !session[:user_id].nil?
+    begin
+      @current_user= User.find session[:user_id] if !session[:user_id].nil?
+    rescue
+      reset_session
+      redirect_to :controller => 'home', :action => 'error_500'
+    end;
   end
 
   def userCould right
     if !@current_user then
       return false if session[:user_id].nil?
-      @current_user= User.find session[:user_id]
+      begin
+        @current_user= User.find session[:user_id]
+      rescue
+        reset_session
+        redirect_to :controller => 'home', :action => 'error_500'
+      end;
     end
     @current_user.can? right
   end
@@ -22,6 +32,11 @@ class ApplicationController < ActionController::Base
 
   def login
     redirect_to :controller => "users", :action => "user_login" and return if !@current_user
-    @current_user= User.find session[:user_id]
+    begin
+      @current_user= User.find session[:user_id]
+    rescue
+      reset_session
+      redirect_to :controller => 'home', :action => 'error_500'
+    end
   end
 end

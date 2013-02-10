@@ -23,6 +23,9 @@ VTool::Application.routes.draw do
   match 'admin' => 'admin#index'
   match 'admin/import/antrag' => 'admin#import_antrag', :via => :post
 
+  match "/404", :to => "home#error_404"
+  match "/422", :to => "home#error_422"
+  match "/500", :to => "home#error_500"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
