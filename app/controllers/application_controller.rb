@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :load_user
+
+  def load_user
+    @current_user= User.find session[:user_id] if !session[:user_id].nil?
+  end
+
   def userCould right
     if !@current_user then
       return false if session[:user_id].nil?
@@ -15,8 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login
-    @current_user = nil
-    redirect_to :controller => "users", :action => "user_login" and return  if session[:user_id].nil?
+    redirect_to :controller => "users", :action => "user_login" and return if !@current_user
     @current_user= User.find session[:user_id]
   end
 end

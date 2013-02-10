@@ -1,8 +1,12 @@
 class AdminController < ApplicationController
+  before_filter :login
+
   def index
+    return false if !userCan :admin
   end
 
   def import_antrag
+    return false if !userCan :admin
     ia = Item.find :first
 
     ActiveSupport::JSON.decode(params["json"].tempfile.read).each do |d|

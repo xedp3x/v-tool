@@ -27,7 +27,8 @@
 		:slide => "Kann Slids bearbeiten",
 		:items => "Kann TO bearbeiten",
 		:projector => "Kann Beamer steuern",
-		:user => "Kann User bearbeiten" 
+		:user => "Kann User bearbeiten",
+		:admin => "Kann alles"
       }.each { |r,d| %> 
         <label class="checkbox">
 			<input type="checkbox" name="user[rights][<%=r%>]" value="true" <%= "checked" if @user.can? r %>><%=d%></input>

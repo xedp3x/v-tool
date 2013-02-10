@@ -20,13 +20,32 @@
             	{:text => "Tagesordnung", :controller => "items", :action => "index"},
             	{:text => "Beamer", :controller => "projectors", :action => "index"},
             	{:text => "Folien", :controller => "slides", :action => "index"},
-            	{:text => "Timer", :controller => "timers", :action => "index"},
-            	{:text => "User", :controller => "users", :action => "index"},
-            	{:text => "Debugger", :controller => "home", :action => "debug"},
+            	{:text => "Timer", :controller => "timers", :action => "index"}
             ].each { |e| %> 
             		<li<%= ' class="active"'.html_safe if controller.controller_name == e[:controller] and (controller.action_name == e[:action] or controller.controller_name != "home") %>><%= link_to e[:text], :controller => e[:controller], :action => e[:action] %></li>
             	<% }
             %>
+            <% if @current_user then %>
+            <li class="dropdown">
+			  <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+			    Admin
+			    <b class="caret"></b>
+			  </a>
+			  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+			  	<%[
+            	{:text => "User", :controller => "users", :action => "index"},
+            	{:text => "Administration", :controller => "admin", :action => "index"},
+            	{:text => "Debugger", :controller => "home", :action => "debug"}
+	            ].each { |e| %>
+	            		<li><%= link_to e[:text], :controller => e[:controller], :action => e[:action] %></li>
+	            	<% }
+	            %>
+	            <li><%= link_to "Logout", :controller => "users", :action => "user_login", :out => true %></li>
+			  </ul>
+			</li>
+			<% else %>
+				<li><%= link_to "Login", :controller => "users", :action => "user_login" %></li>
+			<% end %>
             </ul>
           </div>
           <div class="nav-collapse collapse pull-right">
@@ -38,12 +57,13 @@
       </div>
     </div>
 
+<script type="text/javascript" charset="utf-8">
+  $('.dropdown-toggle').dropdown();
   <% if @load_push then %>
-  <script type="text/javascript" charset="utf-8">
 	document.getElementById("menu-state").innerHTML= "Verbinde . . . ";
 	window.setTimeout('CheckVerbindung()',3000);
 	push.on("connect", function(){	document.getElementById("menu-state").innerHTML= "";});
 	push.on("disconnect", function(){document.getElementById("menu-state").innerHTML= "Verbindung verloren";});
 	push.on("reconnect", function(){ document.getElementById("menu-state").innerHTML= "";});
-  </script>	
   <% end %>
+</script>

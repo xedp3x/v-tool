@@ -16,7 +16,8 @@ class UsersController < ApplicationController
       end
     end
     if params[:out] then
-       session = {}
+       reset_session
+       redirect_to :action => 'user_login'
     end
   end
 
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
   def index
     return false if !userCan :user
     @users = User.all
+    @write_right = userCould :user
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,6 +51,7 @@ class UsersController < ApplicationController
   def new
     return false if !userCan :user
     @user = User.new
+    @user.rights= {}
 
     respond_to do |format|
       format.html # new.html.erb
