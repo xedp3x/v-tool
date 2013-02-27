@@ -14,7 +14,11 @@ VTool::Application.routes.draw do
   match 'group/switch/:a/:b' => 'items#switch'
   resources :items, :path => "group"
   match 'group/:id/:slide' => 'items#show'
-  
+
+  match 'TO/switch/:a/:b' => 'agendas#switch'
+  resources :agendas, :path => "TO"
+  match 'TO/:id/:slide' => 'agendas#show'
+
   resources :slides 
 
   root :to => 'home#index'

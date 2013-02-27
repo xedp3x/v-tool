@@ -1,0 +1,9 @@
+<h1>Gruppen</h1>
+
+<div style="<%= 'left: 50px; position: relative;' if @write_right %> ">
+<%= render "list", :agendas => @agendas %>
+</div>
+<% if @write_right then %>
+<br />
+<%= link_to 'New TO', new_agenda_path %>
+<% end %>

@@ -7,6 +7,7 @@ class CreateSlides < ActiveRecord::Migration
       t.string :unique
 
       t.integer :item_id
+      t.integer :agenda_id
       t.timestamps
     end
     add_index :slides, :unique, :unique => true

@@ -11,14 +11,15 @@ u.allow :admin
 u.save
 
 5.times do |i|
-  itm= Item.create(:name => "TO "+i.to_s)
+  itm= Item.create(:name => "Gr "+i.to_s)
+  age= Agenda.create(:name => "TO "+i.to_s)
   3.times do |s|
-    Slide.create(:art => "Text", :item_id => itm.id, :name => "Slide "+i.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"})
+    Slide.create(:art => "Text", :item_id => itm.id, :agenda => age, :name => "Slide "+i.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"})
   end
   2.times do |u|
-    uitm= Item.create(:name => "TO "+i.to_s+'-'+u.to_s, :parent => itm)
+    uitm= Item.create(:name => "Gr "+i.to_s+'-'+u.to_s, :parent => itm)
     3.times do |s|
-      Slide.create(:art => "Text", :item_id => uitm.id, :name => "Slide "+i.to_s+'-'+u.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"})
+      Slide.create(:art => "Text", :item_id => uitm.id, :agenda_id => age.id, :name => "Slide "+i.to_s+'-'+u.to_s+"-"+s.to_s, :data => {"text" => "== TEXT \\o/"})
     end
   end
 end

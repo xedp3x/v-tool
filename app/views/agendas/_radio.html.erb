@@ -1,0 +1,10 @@
+<% agendas.each do |agenda| %>
+<li>
+	<label class="checkbox" style="margin-left: -20px;">
+	<input type="radio" name="agenda[parent_id]" value="<%=agenda.id%>" style="position: absolute; left: 5px;" <%= "checked" if @agenda.parent == agenda %>><%=agenda.name%>
+	</label>
+	<ol>
+		<%= render "radio", :agendas => agenda.children if agenda.has_children? %>
+	</ol>
+</li>
+<% end %>

@@ -1,0 +1,33 @@
+<%= form_for(@agenda) do |f| %>
+  <% if @agenda.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@agenda.errors.count, "error") %> prohibited this agenda from being saved:</h2>
+
+      <ul>
+      <% @agenda.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div>
+  	<ul class="unstyled">
+  		<li>
+  			<label class="checkbox" style="margin-left: -20px;">
+				<input type="radio" name="agenda[parent_id]" value="" style="position: absolute; left: 5px;" <%= "checked" if @agenda.is_root? %>> ROOT
+			</label>
+			<ol>
+				<%= render "radio", :agendas => @agendas %>
+			</ol>
+		</li>
+  	</ul>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
