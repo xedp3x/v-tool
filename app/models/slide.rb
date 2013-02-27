@@ -1,6 +1,6 @@
 class Slide < ActiveRecord::Base
   attr_accessible :art, :data, :name, :item, :item_id
-  has_paper_trail :ignore => [:item_id]
+  has_paper_trail :ignore => [:item_id], :unless => Proc.new { |t| t.data.nil? }
   serialize :data
   belongs_to :item
   after_save :send_update

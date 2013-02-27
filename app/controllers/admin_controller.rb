@@ -6,15 +6,14 @@ class AdminController < ApplicationController
   end
 
   def import_antrag
-    return false if !userCan :admin
-    ia = Item.find :first
+    return false if !userCan :admi
 
     ActiveSupport::JSON.decode(params["json"].tempfile.read).each do |d|
       s= Slide.find_or_create_by_unique d["id"]
       s.data = {} if s.data.nil?
       s.data["antrag"] = {} if s.data["antrag"].nil?
       if s.item.nil? then
-        ib = ia.children.find_or_create_by_name d["typ"]
+        ib = Item.find_or_create_by_name d["typ"]
         ic = ib.children.find_or_create_by_name d["gruppe"]
         s.item = ic
       end
