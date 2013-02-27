@@ -1,5 +1,6 @@
 class Timer < ActiveRecord::Base
   attr_accessible :color, :default, :name, :position, :visable
+  has_paper_trail
   after_save :send_update
   
   def activ?

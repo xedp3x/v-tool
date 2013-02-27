@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
  */
+
+.archiv  {
+	position: fixed;
+	top: 50%;
+	width: 100%;
+	text-align: center;
+	color: #fcc;
+	font-size: 1000%;
+}

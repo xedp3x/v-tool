@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :rights, :password
+  has_paper_trail :ignore => [:password_sec]
   serialize :rights
   
   def password

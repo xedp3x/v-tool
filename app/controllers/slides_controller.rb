@@ -27,6 +27,15 @@ class SlidesController < ApplicationController
   # GET /slides/1.json
   def show
     @slide = Slide.find(params[:id])
+    @slide = @slide.version_at(Time.at(params[:version].to_i+1)) if params[:version]
+
+    @menu_archiv_link = '<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Version<b class="caret"></b></a><ul class="dropdown-menu" role="menu" aria-labelledby="drop2">'
+    @slide.versions.each{|v|
+        @menu_archiv_link += '<li><a href="'+url_for(:version => v.created_at.to_i )+'" >'+v.created_at.to_s+'</a></li>'
+    }
+    @menu_archiv_link += '</ul>'
+    @menu_archiv_link = @menu_archiv_link.html_safe
+
     @load_push = true
     @menu_edit_link =  ("<a href='"+edit_slide_path(@slide)+"'>Edit</a>").html_safe if userCould :slide
 

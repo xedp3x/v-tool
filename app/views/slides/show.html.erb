@@ -8,9 +8,13 @@
 		</div>
 	</div>
 </div>
+<% if @slide.live? %>
 <script type="text/javascript" charset="utf-8">
     push.subscribe("slide-<%=@slide.id%>", function(data){
       document.getElementById("slide-<%= @slide.id %>").innerHTML= data["data"];
     });
 </script>
+<% else %>
+<div class="archiv">ARCHIV</div>
+<% end %>
 <% end %>
