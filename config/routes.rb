@@ -11,9 +11,9 @@ VTool::Application.routes.draw do
   match 'projectors/command' => 'projectors#command', :via => :post
   resources :projectors
 
-  match 'TO/switch/:a/:b' => 'items#switch'
-  resources :items, :path => "TO"
-  match 'TO/:id/:slide' => 'items#show'
+  match 'group/switch/:a/:b' => 'items#switch'
+  resources :items, :path => "group"
+  match 'group/:id/:slide' => 'items#show'
   
   resources :slides 
 
