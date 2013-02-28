@@ -34,10 +34,18 @@
 		    </select></td>
 		</tr>
 		<tr>
-		    <td>TO Punk</td>
+		    <td>Gruppe</td>
 		    <td><select id="art" name="slide[item_id]">
 		    	<% @items.each do |item| %>
 					<option value="<%=item.id%>" <%= " selected" if @slide.item == item %>><%=item.name%></option>
+				<% end %>
+			</select></td>
+		</tr>
+		<tr>
+		    <td>TO Punk</td>
+		    <td><select id="art" name="slide[item_id]">
+		    	<% @agendas.each do |agenda| %>
+					<option value="<%=agenda.id%>" <%= " selected" if @slide.agenda == agenda %>><%=agenda.name%></option>
 				<% end %>
 			</select></td>
 		</tr>

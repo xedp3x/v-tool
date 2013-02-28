@@ -61,6 +61,7 @@ class SlidesController < ApplicationController
     return false if !userCan :slide
     @slide = Slide.new
     @items = Item.find(:all, :order => "position")
+    @agendas= Agenda.find(:all, :order => "position")
     @projectors = Projector.all
 
     respond_to do |format|
@@ -74,6 +75,7 @@ class SlidesController < ApplicationController
     return false if !userCan :slide
     @slide = Slide.find(params[:id])
     @items = Item.find(:all, :order => "position")
+    @agendas= Agenda.find(:all, :order => "position")
     @projectors = Projector.all
 
     @load_push=true;
