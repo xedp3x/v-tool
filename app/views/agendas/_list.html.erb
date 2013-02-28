@@ -1,11 +1,12 @@
 <ol>
 	<% agendas.each_with_index do |agenda, index| %>
 	<li>
-		<span>
+		<span class="<%= 'finished' if agenda.finished %>">
 			<%= link_to agenda.name, agenda %>
 		</span>
 		<% if @write_right then %>
 		<span style="position: absolute; left: -60px;">
+			<%= link_to 'F', :action => "toggle_finished", :id => agenda.id %>
 			<%= link_to 'E', edit_agenda_path(agenda) %>
 			<%= link_to 'D', agenda, method: :delete, data: { confirm: 'Are you sure?' } %>
 			<%= index > 0?(link_to '↑', :action => "switch", :a => agendas.to_a[index-1].id, :b => agenda.id) : "&nbsp;&nbsp;".html_safe %>

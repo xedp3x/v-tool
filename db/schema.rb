@@ -16,9 +16,10 @@ ActiveRecord::Schema.define(:version => 20130227155315) do
   create_table "agendas", :force => true do |t|
     t.string   "name"
     t.integer  "position"
+    t.boolean  "finished",   :default => false
     t.string   "ancestry"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -55,9 +56,9 @@ ActiveRecord::Schema.define(:version => 20130227155315) do
     t.integer  "default"
     t.integer  "position"
     t.boolean  "visable"
-    t.string   "color"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "color",      :default => "00f"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "users", :force => true do |t|

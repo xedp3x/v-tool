@@ -17,6 +17,7 @@ VTool::Application.routes.draw do
 
   match 'TO/switch/:a/:b' => 'agendas#switch'
   resources :agendas, :path => "TO"
+  match 'TO/:id/toggle/finished' => 'agendas#toggle_finished'
   match 'TO/:id/:slide' => 'agendas#show'
 
   resources :slides 

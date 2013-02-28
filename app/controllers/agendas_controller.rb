@@ -25,6 +25,21 @@ class AgendasController < ApplicationController
     redirect_to agendas_url
   end
 
+  def toggle_finished
+    return false if !userCan :agendas
+    @agenda = Agenda.find(params[:id])
+
+    respond_to do |format|
+      if @agenda.update_attributes(:finished => !@agenda.finished)
+        format.html { redirect_to agendas_url }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @agenda.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /agendas/1
   # GET /agendas/1.json
   def show

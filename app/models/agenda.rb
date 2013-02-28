@@ -1,5 +1,5 @@
 class Agenda < ActiveRecord::Base
-  attr_accessible :name, :position, :parent, :parent_id
+  attr_accessible :name, :position, :parent, :parent_id, :finished
   has_paper_trail :on => [:update, :destroy]
   after_create :generate_position
   has_ancestry
