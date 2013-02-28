@@ -62,6 +62,7 @@
 		  </div>
 		  <div class="btn-group">
 		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-in",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-zoom-in"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-reset",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-search"></i></a>
 		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-out",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-zoom-out"></i></a>
 		  </div>
 		  <div class="btn-group">

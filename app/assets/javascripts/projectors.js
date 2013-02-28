@@ -52,6 +52,9 @@ function projector_cmd(data) {
 			case "zoom-out":
 				$('#body').css('font-size', parseFloat($('#body').css('font-size'), 10) * 0.8);
 				break;
+			case "zoom-reset":
+				$('#body').css('font-size', 13);
+				break;
 			case "scroll-up":
 				$('#body').animate({
 					top : "-=100px",
