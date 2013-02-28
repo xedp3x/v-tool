@@ -6,12 +6,12 @@
     	<% if @write_right then %>
     	<div class="btn-toolbar">
 		  <div class="btn-group">
-	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "ident",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-search"></i></a>
-	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "reload","authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-repeat"></i></a>
+	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "ident",	"authenticity_token" : "<%= form_authenticity_token %>"} );' title="Beamer identifizieren" >	<i class="icon-search"></i></a>
+	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "reload","authenticity_token" : "<%= form_authenticity_token %>"} );' title="Alle Beamer neu starten" >	<i class="icon-repeat"></i></a>
 	      </div>
 	      <div class="btn-group">
-	    	<a class="btn" href="#" onclick='ShowFlashMenu();'>		<i class="icon-bullhorn"></i></a>
-	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "flash", "authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-fullscreen"></i></a>
+	    	<a class="btn" href="#" onclick='ShowFlashMenu();'	title="Naricht posten">		<i class="icon-bullhorn"></i></a>
+	    	<a class="btn" href="#" onclick='$.post("<%= url_for :controller => "projectors", :action => "command"  %>", { "command[cmd]": "flash", "authenticity_token" : "<%= form_authenticity_token %>"} );' title="Alle Narichten verstecken" >	<i class="icon-fullscreen"></i></a>
 	      </div>
 	    </div>
 	    <% end %>
@@ -48,24 +48,24 @@
     	<div class="btn-toolbar">
 		  <div class="btn-group">
 		  	<% if @write_right then %>
-		 	<a class="btn" href="<%= url_for edit_projector_path(projector) %>">										<i class="icon-wrench"></i></a>
+		 	<a class="btn" href="<%= url_for edit_projector_path(projector) %>"	title="Beamer bearbeiten">						<i class="icon-wrench"></i></a>
 		 	<% end %>
-		 	<a class="btn" href="<%= url_for projector %>" target="_blank">												<i class="icon-eye-open"></i></a>
+		 	<a class="btn" href="<%= url_for projector %>" target="_blank"		title="Beameransicht">							<i class="icon-eye-open"></i></a>
 		  </div>
 		  <% if @write_right then %>
 		  <div class="btn-group">
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-up",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-chevron-down"></i></a>
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-null","authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-minus"></i></a>
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-down","authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-chevron-up"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-up",	"authenticity_token" : "<%= form_authenticity_token %>"} );' title="Nach untern scrollen">	<i class="icon-chevron-down"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-null","authenticity_token" : "<%= form_authenticity_token %>"} );' title="Auf normal scrollen">	<i class="icon-minus"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "scroll-down","authenticity_token" : "<%= form_authenticity_token %>"} );' title="Nach oben scrollen">	<i class="icon-chevron-up"></i></a>
 		  </div>
 		  <div class="btn-group">
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-in",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-zoom-in"></i></a>
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-reset",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-search"></i></a>
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-out",	"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-zoom-out"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-in",	"authenticity_token" : "<%= form_authenticity_token %>"} );' title="Vergrößern">	<i class="icon-zoom-in"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-reset",	"authenticity_token" : "<%= form_authenticity_token %>"} );' title="Normale Größe">	<i class="icon-search"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "zoom-out",	"authenticity_token" : "<%= form_authenticity_token %>"} );' title="Verkleinern">	<i class="icon-zoom-out"></i></a>
 		  </div>
 		  <div class="btn-group">
-		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "reload",		"authenticity_token" : "<%= form_authenticity_token %>"} );'>	<i class="icon-repeat"></i></a>
-		    <a class="btn" href="<%= url_for projector %>" data-confirm="Bist du sicher?" data-method="delete" rel="nofollow"><i class="icon-trash"></i></a>
+		    <a class="btn" href="#" onclick='$.post("<%= url_for projector %>", { "command[cmd]": "reload",		"authenticity_token" : "<%= form_authenticity_token %>"} );' title="Beamer neustarten">	<i class="icon-repeat"></i></a>
+		    <a class="btn" href="<%= url_for projector %>" data-confirm="Bist du sicher?" data-method="delete" rel="nofollow"												 title="Beamer löschen">	<i class="icon-trash"></i></a>
 		  </div>
 		  <% end %>
 		</div>		
