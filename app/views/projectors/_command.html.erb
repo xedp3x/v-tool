@@ -1,7 +1,0 @@
-<form style="float: left;" method="post" action="<%= url_for projector %>">
-	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-	<a class="btn" href="#" onclick=" $(this).closest('form').submit();"><i class="icon-<%= icon %>"></i></a>
-	<% data.each { |k,v| %>
-	<input type=hidden name="command[<%=k%>]" value="<%=v%>" />
-	<% } %>
-</form>
