@@ -1,5 +1,3 @@
-<h1>Listing projectors</h1>
-
 <table class="table table-hover">
   <tr>
     <th>Name</th>
@@ -24,7 +22,7 @@
   		<form  method="post" action="<%= url_for :controller => "projectors", :action => "command"  %>">
   			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
     	 	<input type=hidden name="command[cmd]" value="flash" />
-    	 	<input type=text name="command[text]" class="input-xxlarge"  placeholder="Naricht"/><br />
+    	 	<input type=text name="command[text]" class="input-xxlarge"  placeholder="Nachricht"/><br />
     	 	<select name="command[time]">
 				  <option value="30">30 Sekunden anzeigen</option>
 				  <option value="60">1 Minuten anzeigen</option>
@@ -34,9 +32,9 @@
 				  <option value="0">Durchgängig anzeigen</option>
 			</select><br />
 				Als
-				<input type=submit name="command[name]" value="danger" 	class="btn btn-danger"/>
-				<input type=submit name="command[name]" value="information" class="btn btn-info" />
-				<input type=submit name="command[name]" value="success" 	class="btn btn-success"/> 
+				<button type=submit name="command[name]" value="danger" 		class="btn btn-danger">	Warung</button>
+				<button type=submit name="command[name]" value="information"	class="btn btn-info">	Information</button>
+				<button type=submit name="command[name]" value="success" 		class="btn btn-success">Hinweiß</button>
 				anzeigen.
     	</form>
   	</td>
@@ -78,5 +76,5 @@
 
 <% if @write_right then %>
 <br />
-<%= link_to 'New Projector', new_projector_path %>
+<%= link_to 'Neuer Beamer', new_projector_path %>
 <% end %>
