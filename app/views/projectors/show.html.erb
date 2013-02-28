@@ -33,6 +33,7 @@
 		projector = <%=@projector.id %>;
 		myip = '<%=request.remote_ip%>';
 		slide = <%=@projector.slide_id %>;
+		hasTimer = <%=@projector.has_timer %>;
 		
 		var connected = false;
 		push.on("connect", function(){
