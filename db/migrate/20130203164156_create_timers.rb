@@ -5,7 +5,7 @@ class CreateTimers < ActiveRecord::Migration
       t.integer :default
       t.integer :position
       t.boolean :visable
-      t.string :color
+      t.string :color,  :default => "00f"
 
       t.timestamps
     end
