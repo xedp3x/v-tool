@@ -1,5 +1,7 @@
 <% if params[:search] then %>
-	<h1>Gefundene Folien:</h1>
+	<% if @slides.count != 0 then %>
+		<h1>Gefundene Folien:</h1>
+	<% end %>
 <% else %>
 	<h1>Alle Folien</h1>
 <% end %>
@@ -32,5 +34,5 @@
 
 <% if @write_right then %>
 <br />
-<%= link_to 'New Slide', new_slide_path %>
+<%= link_to 'Neue Folie', new_slide_path %>
 <% end %>
