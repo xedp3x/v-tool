@@ -1,6 +1,6 @@
 <h1>Tagesordnung</h1>
 
-<div style="<%= 'left: 50px; position: relative;' if @write_right %> ">
+<div style="<%= 'margin-left: 50px; position: relative;' if @write_right %> ">
 <%= render "list", :agendas => @agendas %>
 </div>
 <% if @write_right then %>
