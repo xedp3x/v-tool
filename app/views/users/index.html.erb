@@ -1,10 +1,8 @@
-<h1>Listing users</h1>
+<h1>Liste aller Benutzer</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>Password sec</th>
-    <th>Rights</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,16 +11,13 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.name %></td>
-    <td><%= user.password_sec %></td>
-    <td><%= user.rights %></td>
-    <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Löschen', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <% if @write_right then %>
 <br />
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'Neuer Benutzer', new_user_path %>
 <% end %>

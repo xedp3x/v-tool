@@ -37,13 +37,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    return false if !userCan :user
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
-    end
+    redirect_to :action => "index"
   end
 
   # GET /users/new

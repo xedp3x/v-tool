@@ -25,10 +25,11 @@
 	<%{
 		:timer => "Kann Timer steuern",
 		:slide => "Kann Slids bearbeiten",
-		:items => "Kann TO bearbeiten",
+		:agendas => "Kann TO bearbeiten",
+		:items => "Kann Gruppen bearbeiten",
 		:projector => "Kann Beamer steuern",
 		:user => "Kann User bearbeiten",
-		:admin => "Kann alles"
+		:admin => "Kann alles (inc. Import)"
       }.each { |r,d| %> 
         <label class="checkbox">
 			<input type="checkbox" name="user[rights][<%=r%>]" value="true" <%= "checked" if @user.can? r %>><%=d%></input>
@@ -36,6 +37,6 @@
     <% } %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit value: "Benutzer speichern"%>
   </div>
 <% end %>
