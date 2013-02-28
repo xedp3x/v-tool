@@ -1,6 +1,6 @@
 <h1 style="border-bottom: 1px solid #DDDDDD; padding-bottom: 10px; margin-bottom: -1px; margin-left: 10px; padding-left: 10px;" ><%= @agenda.name %></h1>
 <% if @slides.count == 0 then%>
-<p>Zu der Gruppe gibt es keine Folien.</p>
+<p>Zu diesem Tagesordnungspunkt gibt es keine Folien.</p>
 <% else %>
 <div class="tabbable tabs-left">
   <ul class="nav nav-tabs" id="agenda-<%=@agenda.id %>" style="max-width:20%;">
