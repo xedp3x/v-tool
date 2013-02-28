@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
   def index
+    @slide = Slide.find_by_name "HOME"
+    return false if @slide.nil?
+    render :template => "slides/_show"
   end
   
   def error_404
