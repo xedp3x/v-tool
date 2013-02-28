@@ -12,20 +12,22 @@
 
 .antag_info th {
   text-align:left;
+  font-size: 13px;
 }
 
 .antag_info td {
   text-align:left;
+  font-size: 13px;
 }
 
 .antrag_info_head {
   text-align:center; 
   background:#ddd;
   border:2px solid #ccc;
-  font-size: 4em;
+  font-size: 52px;
   height: 40px;
   border-radius: 10px;
-  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .antrag_body {
