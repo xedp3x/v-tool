@@ -6,7 +6,7 @@ class AdminController < ApplicationController
   end
 
   def import_antrag
-    return false if !userCan :admi
+    return false if !userCan :admin
 
     ActiveSupport::JSON.decode(params["json"].tempfile.read).each do |d|
       s= Slide.find_or_create_by_unique d["id"]
