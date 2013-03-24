@@ -30,6 +30,7 @@
 		      <option<%= " selected" if @slide.art == "Text" %>>Text</option>
 		      <option<%= " selected" if @slide.art == "Antrag" %>>Antrag</option>
 		      <option<%= " selected" if @slide.art == "HTML" %>>HTML</option>
+		      <option<%= " selected" if @slide.art == "Gruppe" %>>Gruppe</option>
 		      <option<%= " selected" if @slide.art == "twitter" %>>twitter</option>
 		    </select></td>
 		</tr>
@@ -95,12 +96,21 @@
 	  	Infos: Titel|Text	<br /><textarea name="slide[data][antrag][note]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["note"] rescue "" %></textarea><br />
 	  	Links: Titel|ULR|name<br /><textarea name="slide[data][antrag][link]"	rows="05" class="input-xxlarge"><%= @slide.data["antrag"]["link"] rescue "" %></textarea><br />
 	  </div>
-	
+
 	  <div class="types" id="type_twitter"<%= " style='display: none'".html_safe if @slide.art != "twitter" %>>
 	  	<a href="http://tweetwally.com">tweetwally</a> URL: <br />
 	  	<div class="input-append">
 		  	<input name="slide[data][twitter]" value="<%= @slide.data["twitter"] rescue "" %>" type=text /><span class="add-on">.tweetwally.com</span>
 		</div>
+	  </div>
+
+	  <div class="types" id="type_Gruppe"<%= " style='display: none'".html_safe if @slide.art != "Gruppe" %>>
+	  	Angezeigte Gruppe:
+	  	<select id="art" name="slide[data][gruppe][id]">
+		   	<% @items.each do |item| %>
+				<option value="<%=item.id%>" <%= "selected" if @slide.data["gruppe"]["id"].to_i == item.id rescue "" %>><%=item.name%></option>
+			<% end %>
+		</select>
 	  </div>	
 	
   </div>
