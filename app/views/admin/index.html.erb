@@ -1,3 +1,29 @@
+<h2>Import vom Antragsserver</h2>
+<form method="post" action="<%= url_for :action => 'load_antrag' %>" >
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+	<% if @books == [] then%>
+	Es konnten keine Antragsbücher gefunden werden.
+	<br />
+	Ein häufiger grund dafür ist keine Internetverbindung.
+	<% else %>
+	<table>
+		<tr>
+			<th>Download</th>
+			<th>Name</th>
+			<th>Beschreibung</th>
+		</tr>
+		<% @books.each { | book|%>
+		<tr>
+			<td><input type="submit" name="load" value="<%=book["buch"]%>"/></td>
+			<td><%=book["name"]%></td>
+			<td><%=book["note"]%></td>
+		</tr>
+		<% } %>
+	</table>
+	<% end %>
+</form>
+
+<h2>Import via JSON</h2>
 <form method="post" enctype="multipart/form-data" action="<%= url_for :action => 'import_antrag' %>" >
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 	Anträge importiren

@@ -27,6 +27,7 @@ VTool::Application.routes.draw do
   
   match 'admin' => 'admin#index'
   match 'admin/import/antrag' => 'admin#import_antrag', :via => :post
+  match 'admin/load/antrag' => 'admin#load_antrag', :via => :post
 
   match "/404", :to => "home#error_404"
   match "/422", :to => "home#error_422"
